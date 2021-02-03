@@ -11,15 +11,22 @@ const info = console.log
 const warning = log(chalk.yellow)
 const error = log(chalk.red)
 
-//config
-const defaults = {
+const defaults = { // default config
     host: "localhost",
     port: 3000,
     debug: false,
 }
 
-module.exports = {
+const e = { // event names
+    disconnect: 'disconnect',
+    connection: 'connection',
+    log: 'log',
+    data: 'data',
+    sustain: 'sustain',
+    release: 'release',
+}
 
+module.exports = {
     serve: (options = {}) => {
         const config = Object.assign({}, defaults, options)
 
@@ -39,29 +46,29 @@ module.exports = {
         })
 
         app.get("/", (req, res) => {
-            res.send("datasocket server is up ... ohai ;)")
+            res.send("data socket server is up ... ohai ;)")
         })
 
-        io.on("connection", socket => {
+        io.on(e.connection, socket => {
             success(`${socket.id} user connected`)
 
-            socket.on("disconnect", () => warning(`${socket.id} user disconnected`))
+            socket.on(e.disconnect, () => warning(`${socket.id} user disconnected`))
 
-            socket.on("log", msg => { debug(msg) })
+            socket.on(e.log, debug)
 
-            socket.on("data", data => {
-                io.emit("data", sustained || data) //emit either the sustained dataset or the passed in dataset
-                debug("data:", data)
+            socket.on(e.data, data => {
+                io.emit(e.data, sustained || data) //emit either the sustained dataset or the passed in dataset
+                debug(e.data, data)
             })
 
-            socket.on("sustain", data => {
+            socket.on(e.sustain, data => {
                 sustained = data // deliver the same dataset repeatedly until release msg received
-                debug("sustain:", data)
+                debug(e.sustain, data)
             })
 
-            socket.on("release:", data => {
+            socket.on(e.release, data => {
                 sustained = null // cancel the sustain
-                debug("release", data)
+                debug(e.release, data)
             })
 
         })
