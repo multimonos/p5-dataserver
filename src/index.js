@@ -10,13 +10,6 @@ const success = log(chalk.green)
 const info = console.log
 const warning = log(chalk.yellow)
 const error = log(chalk.red)
-
-const defaults = { // default config
-    host: "localhost",
-    port: 3000,
-    debug: false,
-}
-
 const e = { // event names
     disconnect: 'disconnect',
     connection: 'connection',
@@ -24,6 +17,11 @@ const e = { // event names
     data: 'data',
     sustain: 'sustain',
     release: 'release',
+}
+const defaults = { // default config
+    host: "localhost",
+    port: 3000,
+    debug: false,
 }
 
 module.exports = {
