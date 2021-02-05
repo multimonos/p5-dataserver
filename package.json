@@ -1,5 +1,5 @@
 {
-    "name": "p5-dataserver",
+    "name": "@multimonos/p5-dataserver",
     "version": "0.1.0",
     "description": "p5 data socket server",
     "main": "lib/index.js",
