@@ -52,7 +52,7 @@ module.exports = {
 
             socket.on(e.disconnect, () => warning(`${socket.id} user disconnected`))
 
-            socket.on(e.log, debug)
+            socket.on(e.log, console.log)
 
             socket.on(e.data, data => {
                 io.emit(e.data, sustained || data) //emit either the sustained dataset or the passed in dataset
