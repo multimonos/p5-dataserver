@@ -10,7 +10,7 @@
         "build": "microbundle build --target=node",
         "watch": "microbundle watch --no-sourcemap --target=node"
     },
-    "keywords": ['p5js', 'socket','server'],
+    "keywords": ["p5js", "socket","server"],
     "author": "craig hopgood <searaig@gmail.com>  (https://multimonos.com)",
     "license": "MIT",
     "devDependencies": {
